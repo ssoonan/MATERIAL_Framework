@@ -196,7 +196,7 @@ public class Generator {
 	 * @param destination
 	 */
 	public static void copyBaseProject(String destination) {
-		Path sourceDir = Paths.get("../QNX_EdgeSys_Base");
+		Path sourceDir = Paths.get("../Linux_EdgeSys_Base");
 		Path destinationDir = Paths.get(destination);
 
 		System.out.println("\n=======================================================================");

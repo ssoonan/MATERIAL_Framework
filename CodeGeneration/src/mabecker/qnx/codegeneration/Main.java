@@ -21,7 +21,7 @@ public class Main {
 		boolean COMPILE = true;		// Set to true to automatically compile the projects.
 		boolean TRANSFER = false;	// Set to true to automatically transfer the executables to the QNX nodes.
 		
-		int selectedExperiment = WATERS2019_PARTITIONED;	// Select the project here. This could also be an argument to the program...
+		int selectedExperiment = BBW_SINGLE_NODE_FPPS;	// Select the project here. This could also be an argument to the program...
 		
 		String inputFolder = null;
 		String modelName = null;

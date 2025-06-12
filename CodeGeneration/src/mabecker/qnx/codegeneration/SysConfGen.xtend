@@ -22,13 +22,11 @@ class SysConfGen {
 			«ENDFOR»
 			
 			/**
-			 * Definitions for APS partition IDs
+			 * Definitions for partition IDs (Linux - simplified, no cgroups for minimal approach)
 			 */
 			«FOR p : node.partitions»
 				#define «p.name.replace(' ', '_').toUpperCase»	«node.partitions.indexOf(p)»
 			«ENDFOR»
-			
-			#define APS_WINDOW_SIZE	«node.apsWindowsizeMs»
 			
 			/**
 			 * IP address of this node
@@ -41,13 +39,9 @@ class SysConfGen {
 			#define SETTING_NAME "«settingName»"
 			
 			/**
-			 * Enable the APS budget tracing
+			 * APS tracing not supported in Linux version
 			 */
-			«IF recordApsTrace == true»
-				#define TRACE_APS_BUDGETS
-			«ELSE»
-				//#define TRACE_APS_BUDGETS
-			«ENDIF»
+			//#define TRACE_APS_BUDGETS
 			/**
 			 * Enable to collect the execution trace using tracelogger
 			 */
@@ -63,22 +57,9 @@ class SysConfGen {
 			#define EXPERIMENT_RUNTIME_MS «runtime_ms»
 			
 			/**
-			 * Select which mode is used for APS logging.
-			 * The APS thread is assigned to CORE1 and executes with priority 255.
-			 * APS_THREAD_PERIODIC
-			 * In periodic mode the APS thread executes periodically with a period of 1ms.
-			 * APS_THREAD_SPINNING
-			 * In spinning mode the APS thread does not sleep between consecutive jobs but keeps spinning instead.
-			 * This is useful if APS statistics need to be logged but at the same time all cores should be 100% utilized.
+			 * APS not supported in Linux version - simplified approach
 			 */
-			#define APS_MODE APS_THREAD_SPINNING
-			
-			#define REGISTER_APS_PARTITIONS \
-			«FOR p : node.partitions»
-				«IF p.isSystemPartition == false»
-					aps_add_partition_description("«p.name»", «p.budgetPercent», «p.budgetPercentageScale»);\
-				«ENDIF»
-			«ENDFOR»
+			// No APS partitions in Linux version
 			
 			#define REGISTER_THREADS  \
 			«FOR t : node.allTasks»
